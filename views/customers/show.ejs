@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+<h1>customers</h1>
+
+<h1><%=customer.name %></h1> 
+<ul>
+    <li><%=customer.Age %></li>
+</ul>
+
+<a href="/customers/<%= customer._id %>/edit">EDIT</a>
+    

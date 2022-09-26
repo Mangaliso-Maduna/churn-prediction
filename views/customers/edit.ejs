@@ -1,0 +1,64 @@
+<% layout('layouts/boilerplate') %> 
+<h1>edit customer page</h1>
+
+<form action="/customers" method="post">
+    <div>
+        <label for="name">Customer Names:</label>
+        <input type="text" name="name" id="name" value="<%=customer.name %>">
+    </div>
+    <div>
+        <label for="Age">Customer Age:</label>
+        <input type="number" name="Age" id="Age" value="<%=customer.Age %>">
+    </div>
+    <div>
+        <label for="creditScore">Credit Score:</label>
+        <input type="number" name="CreditScore" id="creditScore" value="<%=customer.CreditScore %>">
+    </div>
+    <div>
+        <label for="geography">Geography:</label>
+        <select name="Geography" id="geography">
+
+            <% for( let geography of geographies ) { %>
+                <option value="<%=geography%>" <%=customer.Geography === geography ? 'selected':'' %>><%=geography%></option>
+            <% } %>
+
+
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Spain">Spain</option>
+        </select>
+    </div>
+    <div>
+        <label for="Gender">Gender:</label>
+        <select name="Gender" id="Gender">
+            <% for( let gender of genders ) { %>
+                <option value="<%=gender%>" <%=customer.Gender === gender ? 'selected':'' %>><%=gender%></option>
+            <% } %>
+        </select>
+    </div>
+    <div>
+        <label for="Tenure">Tenure:</label>
+        <input type="number" name="Tenure" id="Tenure" value="<%=customer.Tenure %>">
+    </div>
+    <div>
+        <label for="Balance">Available Balance:</label>
+        <input type="number" name="Balance" id="Balance" value="<%=customer.Balance %>">
+    </div>
+    <div>
+        <label for="NumberOfProducts">Number Of Products:</label>
+        <input type="number" name="NumberOfProducts" id="NumberOfProducts" value="<%=customer.NumberOfProducts %>">
+    </div>
+    <div>
+        <label for="HasCrCard">Has Credit Card <strong>(Yes:1, No:0)</strong>:</label>
+        <input type="number" name="HasCrCard" id="HasCrCard" value="<%=customer.HasCrCard %>">
+    </div>
+    <div>
+        <label for="IsActiveMember">Is Active Member <strong>(Yes:1, No:0)</strong>:</label>
+        <input type="number" name="IsActiveMember" id="IsActiveMember" value="<%=customer.IsActiveMember %>">
+    </div>
+    <div>
+        <label for="EstimatedSalary">Estiamted Salary: </label>
+        <input type="number" name="EstimatedSalary" id="EstimatedSalary" value="<%=customer.EstimatedSalary %>">
+    </div>
+    <button>Submit</button>
+</form>

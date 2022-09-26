@@ -1,0 +1,59 @@
+<% layout('layouts/boilerplate') %> 
+    <h1>a form will be used to add customer</h1>
+
+    <form action="/customers" method="post">
+        <div>
+            <label for="name">Customer Names:</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div>
+            <label for="Age">Customer Age:</label>
+            <input type="number" name="Age" id="Age">
+        </div>
+        <div>
+            <label for="creditScore">Credit Score:</label>
+            <input type="number" name="CreditScore" id="creditScore">
+        </div>
+        <div>
+            <label for="geography">Geography:</label>
+            <select name="Geography" id="geography">
+                <option value="">--SELECT--</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Spain">Spain</option>
+            </select>
+        </div>
+        <div>
+            <label for="Gender">Gender:</label>
+            <select name="Gender" id="Gender">
+                <option value="">--SELECT--</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div>
+            <label for="Tenure">Tenure:</label>
+            <input type="number" name="Tenure" id="Tenure">
+        </div>
+        <div>
+            <label for="Balance">Available Balance:</label>
+            <input type="number" name="Balance" id="Balance">
+        </div>
+        <div>
+            <label for="NumberOfProducts">Number Of Products:</label>
+            <input type="number" name="NumberOfProducts" id="NumberOfProducts">
+        </div>
+        <div>
+            <label for="HasCrCard">Has Credit Card <strong>(Yes:1, No:0)</strong>:</label>
+            <input type="number" name="HasCrCard" id="HasCrCard">
+        </div>
+        <div>
+            <label for="isActive">Is Active Member <strong>(Yes:1, No:0)</strong>:</label>
+            <input type="number" name="IsActiveMember" id="isActive">
+        </div>
+        <div>
+            <label for="salary">Estiamted Salary: </label>
+            <input type="number" name="EstimatedSalary" id="salary">
+        </div>
+        <button>Submit</button>
+    </form>
