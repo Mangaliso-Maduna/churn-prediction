@@ -60,12 +60,18 @@ app.get('/customers/:id/edit', async(req,res)=>{
     res.render('customers/edit',{customer, genders, geographies})
 })
 
+app.put("/customers/:id", async(req,res)=>{
+    const {id} = req.params
+    const customer = await Customer.findByIdAndUpdate(id,{... req.body})
+    res.redirect(`/customers/${customer._id}`)
+})
+
 //delete
-app.get('/customers/:id/delete', async (req,res)=>{
+app.delete('/customers/:id', async (req,res)=>{
     const {id} = req.params
     const deletedCustomer = await Customer.findByIdAndDelete(id)
     console.log(deletedCustomer)
-    res.send('deleted')
+    res.redirect("/customers")
 })
 
 app.get('/',(req,res)=>{

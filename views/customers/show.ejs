@@ -7,4 +7,7 @@
 </ul>
 
 <a href="/customers/<%= customer._id %>/edit">EDIT</a>
+<form class="d-inline" action="/customers/<%=customer._id%>?_method=DELETE" method="post">
+    <button class="btn btn-danger">DELETE</button>
+</form>
     

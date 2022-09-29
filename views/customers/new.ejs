@@ -1,59 +1,65 @@
 <% layout('layouts/boilerplate') %> 
-    <h1>a form will be used to add customer</h1>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1 class="text-center">Add new customer</h1>
 
     <form action="/customers" method="post">
-        <div>
-            <label for="name">Customer Names:</label>
-            <input type="text" name="name" id="name">
+        <div class="mb-3">
+            <label class="form-label" for="name">Customer Names</label>
+            <input class="form-control" type="text" name="name" id="name">
         </div>
-        <div>
-            <label for="Age">Customer Age:</label>
-            <input type="number" name="Age" id="Age">
+        <div class="mb-3">
+            <label class="form-label" for="Age">Customer Age</label>
+            <input class="form-control" type="number" name="Age" id="Age">
         </div>
-        <div>
-            <label for="creditScore">Credit Score:</label>
-            <input type="number" name="CreditScore" id="creditScore">
+        <div class="mb-3">
+            <label class="form-label" for="creditScore">Credit Score:</label>
+            <input class="form-control" type="number" name="CreditScore" id="creditScore">
         </div>
-        <div>
-            <label for="geography">Geography:</label>
-            <select name="Geography" id="geography">
-                <option value="">--SELECT--</option>
+        <div class="mb-3">
+            <label class="form-label" for="geography">Geography:</label>
+            <select  class="form-select" name="Geography" id="geography">
+                <option selected >--SELECT--</option>
                 <option value="France">France</option>
                 <option value="Germany">Germany</option>
                 <option value="Spain">Spain</option>
             </select>
         </div>
-        <div>
-            <label for="Gender">Gender:</label>
-            <select name="Gender" id="Gender">
-                <option value="">--SELECT--</option>
+        <div class="mb-3">
+            <label class="form-label" for="Gender">Gender:</label>
+            <select class="form-select" name="Gender" id="Gender">
+                <option selected>--SELECT--</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
         </div>
-        <div>
-            <label for="Tenure">Tenure:</label>
-            <input type="number" name="Tenure" id="Tenure">
+        <div class="mb-3">
+            <label class="form-label" for="Tenure">Tenure:</label>
+            <input class="form-control" type="number" name="Tenure" id="Tenure">
         </div>
-        <div>
-            <label for="Balance">Available Balance:</label>
-            <input type="number" name="Balance" id="Balance">
+        <div class="mb-3">
+            <label class="form-label" for="Balance">Available Balance:</label>
+            <input class="form-control" type="number" name="Balance" id="Balance">
         </div>
-        <div>
-            <label for="NumberOfProducts">Number Of Products:</label>
-            <input type="number" name="NumberOfProducts" id="NumberOfProducts">
+        <div class="mb-3">
+            <label class="form-label" for="NumberOfProducts">Number Of Products:</label>
+            <input class="form-control" type="number" name="NumberOfProducts" id="NumberOfProducts">
         </div>
-        <div>
-            <label for="HasCrCard">Has Credit Card <strong>(Yes:1, No:0)</strong>:</label>
-            <input type="number" name="HasCrCard" id="HasCrCard">
+        <div class="mb-3">
+            <label class="form-label" for="HasCrCard">Has Credit Card <strong>(Yes:1, No:0)</strong>:</label>
+            <input class="form-control" type="number" name="HasCrCard" id="HasCrCard">
         </div>
-        <div>
-            <label for="isActive">Is Active Member <strong>(Yes:1, No:0)</strong>:</label>
-            <input type="number" name="IsActiveMember" id="isActive">
+        <div class="mb-3">
+            <label class="form-label" for="isActive">Is Active Member <strong>(Yes:1, No:0)</strong>:</label>
+            <input class="form-control" type="number" name="IsActiveMember" id="isActive">
         </div>
-        <div>
-            <label for="salary">Estiamted Salary: </label>
-            <input type="number" name="EstimatedSalary" id="salary">
+        <div class="mb-3">
+            <label class="form-label" for="salary">Estiamted Salary: </label>
+            <input class="form-control" type="number" name="EstimatedSalary" id="salary">
         </div>
-        <button>Submit</button>
+        <div class="mb-3">
+            <button class="btn btn-success">Submit</button>
+        </div>
     </form>
+        </div>
+    </div>
