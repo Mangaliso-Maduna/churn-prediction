@@ -1,13 +1,116 @@
 <% layout('layouts/boilerplate') %>
-<h1>customers</h1>
 
-<h1><%=customer.name %></h1> 
-<ul>
-    <li><%=customer.Age %></li>
-</ul>
-
-<a class="btn btn-info" href="/customers/<%= customer._id %>/edit">EDIT</a>
+    <div class="panel-body mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png" data-original-title="Usuario"> 
+            </div>
+            <div class="col-md-8">
+                <div class="table-responsive">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <i class="fa-solid fa-asterisk"></i>
+                                    <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                    Customer Identification                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer._id %>      
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                    Customer Name                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer.name %>     
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-cloud text-primary"></span>  
+                                    Age                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer.Age %>  
+                            </td>
+                        </tr>
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                    Gender                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer.Gender %> 
+                            </td>
+                        </tr>
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                    Tenure                                               
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer.Tenure %>
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                    Email                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary text-muted">
+                                noreply@email.com  
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    Products Owned                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <%=customer.NumberOfProducts %>
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    Estimated Salary                                              
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                <span class="text-muted">R</span> <%=customer.EstimatedSalary %>
+                            </td>
+                        </tr>                                    
+                    </tbody>
+                </table>
+                </div>
+                <div class="mt-4">
+                    <a class="btn btn-info" href="/customers/<%= customer._id %>/edit">EDIT</a>
 <form class="d-inline" action="/customers/<%=customer._id%>?_method=DELETE" method="post">
     <button class="btn btn-danger">DELETE</button>
 </form>
+                </div>
+            </div>
+        </div>
+    </div>     
+
     

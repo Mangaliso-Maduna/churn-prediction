@@ -2,9 +2,40 @@
     <h1>This page show all bank customers</h1>
     <ul>
         <% for( let customer of customers ) { %>
-            <li>
-                <a href="/customers/<%= customer._id %>"><%= customer.name %></a>
-            </li>
+            <div class="card mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" alt="" src="https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png" >
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title display-4"><%=customer.name %> </h5>
+                            
+                            <p class="card-text">
+                                <h5 class="card-subtitle">Customer Age</h5>
+                                <div class="text-muted">
+                                    <%=customer.Age %> 
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <h5 class="card-subtitle">Customer Geography</h5>
+                                <div class="text-muted">
+                                    <%=customer.Geography %> 
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <h5 class="card-subtitle">Gender</h5>
+                                <div class="text-muted">
+                                    <%=customer.Gender %> 
+                                </div>
+                            </p>
+                            <a class="btn btn-primary" href="/customers/<%=customer._id %>">view <%=customer.name %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <% } %>
     </ul>
     <a href="/customers/new">Add new customer</a>
+
+    
