@@ -25,6 +25,11 @@ db.once('open', ()=>{
 });
 
 //all customers
+app.get('/customers/dashboard',(req,res)=>{
+    res.render('customers/dashboard')
+});
+
+
 app.get('/customers', async (req,res)=>{
     const customers = await Customer.find({})
     res.render('customers/index',{customers})
@@ -73,6 +78,7 @@ app.delete('/customers/:id', async (req,res)=>{
     console.log(deletedCustomer)
     res.redirect("/customers")
 })
+
 
 app.get('/',(req,res)=>{
     res.render('home')
