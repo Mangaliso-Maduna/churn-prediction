@@ -3,23 +3,26 @@
         <div class="col-6 offset-3">
             <h1 class="text-center">Add new customer</h1>
 
-    <form action="/customers" method="post">
+    <form action="/customers" method="post" class="validated-form" novalidate>
         <div class="mb-3">
             <label class="form-label" for="name">Customer Names</label>
-            <input class="form-control" type="text" name="name" id="name">
+            <input class="form-control" type="text" name="name" id="name" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="Age">Customer Age</label>
-            <input class="form-control" type="number" name="Age" id="Age">
+            <input class="form-control" type="number" name="Age" id="Age" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="creditScore">Credit Score:</label>
-            <input class="form-control" type="number" name="CreditScore" id="creditScore">
+            <input class="form-control" type="number" name="CreditScore" id="creditScore" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="geography">Geography:</label>
-            <select  class="form-select" name="Geography" id="geography">
-                <option selected >--SELECT--</option>
+            <select  class="form-select" name="Geography" id="geography" aria-placeholder="select geography" required>
+                <option selected ></option>
                 <option value="France">France</option>
                 <option value="Germany">Germany</option>
                 <option value="Spain">Spain</option>
@@ -27,35 +30,35 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="Gender">Gender:</label>
-            <select class="form-select" name="Gender" id="Gender">
-                <option selected>--SELECT--</option>
+            <select class="form-select" name="Gender" id="Gender" required> 
+                <option selected disabled></option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
         </div>
         <div class="mb-3">
             <label class="form-label" for="Tenure">Tenure:</label>
-            <input class="form-control" type="number" name="Tenure" id="Tenure">
+            <input class="form-control" type="number" name="Tenure" id="Tenure" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="Balance">Available Balance:</label>
-            <input class="form-control" type="number" name="Balance" id="Balance">
+            <input class="form-control" type="number" name="Balance" id="Balance" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="NumberOfProducts">Number Of Products:</label>
-            <input class="form-control" type="number" name="NumberOfProducts" id="NumberOfProducts">
+            <input class="form-control" type="number" name="NumberOfProducts" id="NumberOfProducts" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="HasCrCard">Has Credit Card <strong>(Yes:1, No:0)</strong>:</label>
-            <input class="form-control" type="number" name="HasCrCard" id="HasCrCard">
+            <input class="form-control" type="number" name="HasCrCard" id="HasCrCard" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="isActive">Is Active Member <strong>(Yes:1, No:0)</strong>:</label>
-            <input class="form-control" type="number" name="IsActiveMember" id="isActive">
+            <input class="form-control" type="number" name="IsActiveMember" id="isActive" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="salary">Estiamted Salary: </label>
-            <input class="form-control" type="number" name="EstimatedSalary" id="salary">
+            <input class="form-control" type="number" name="EstimatedSalary" id="salary" required>
         </div>
         <div class="mb-3">
             <button class="btn btn-success">Submit</button>
