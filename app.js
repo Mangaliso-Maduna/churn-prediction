@@ -1,6 +1,6 @@
-/* if(process.env.NODE_ENV !== 'production'){
-    require('dote')
-} */
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+} //hidding errors
 
 const express = require('express');
 const app = express();
@@ -18,6 +18,8 @@ const flash = require('connect-flash')
 const LocalStrategy = require('passport-local')
 const passport = require('passport')
 const User = require('./models/user')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet')
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/customerData', {
@@ -33,6 +35,7 @@ app.engine('ejs',engine)
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname,'public')))
+app.use(mongoSanitize())
 
 const sessionConfig = {
     secret:'thisshouldbeasecret!',
@@ -47,8 +50,59 @@ const sessionConfig = {
 app.use(sessions(sessionConfig))
 app.use(flash())
 
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fontawesome.com/",
+    "https://kit-free.fontawesome.com/",
+    "https://code.jquery.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net/",
+    "https://icons.getbootstrap.com/"
+]
+
+const styleSrcUrls = [
+    "https://fontawesome.com/",
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://use.fontawesome.com/"
+]
+
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/"
+]
+
+const fontSrcUrls = []
+
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: [],
+        connectSrc: ["'self'", ...connectSrcUrls],
+        scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+        styleSrc: ["'self'", "'unsafe-inline'",...styleSrcUrls],
+        workerSrc: ["'self'","'blob:'"],
+        objectSrc: [],
+        imgSrc: [
+            "'self'",
+            "'blob:'",
+            "'data'",
+            "'https://res.cloudinary.com/YOURNAME/'",
+            "'https://www.seekpng.com/'",
+            "'https://images.unsplash.com/'",
+            "'https://img.icons8.com/office'"
+        ],
+        fontSrc: ["'self'", ...fontSrcUrls],
+      },
+    })
+  );
+
 app.use((req,res,next)=>{
-    console.log(req.session)
+    
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')
