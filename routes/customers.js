@@ -38,7 +38,7 @@ router.get('/:id', catchAsync(async (req,res,next)=>{
     const customer = await Customer.findById(id)
     if(!customer){
         req.flash('error','cannot find that customer')
-        return res.redirect('/campgrounds')
+        return res.redirect('/customers')
     }
     res.render('customers/show',{customer})
 }));
