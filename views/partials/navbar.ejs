@@ -11,6 +11,14 @@
           <a class="nav-link" href="/customers/new">New Customer</a>
           <a class="nav-link" href="/customers/dashboard">Dashboard</a>
         </div>
+        <div class="navbar-nav ml-auto">
+          <% if (!currentUser) { %>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+          <% }%>
+            <a class="nav-link" href="/logout">Logout</a>
+            
+        </div>
       </div>
     </div>
   </nav>

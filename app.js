@@ -11,6 +11,14 @@ const path = require('path')
 const methodOverride = require('method-override')
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/ExpressError')
+const customersRoutes = require('./routes/customers')
+const userRoutes = require('./routes/users')
+const sessions = require('express-session')
+const flash = require('connect-flash')
+const LocalStrategy = require('passport-local')
+const passport = require('passport')
+const User = require('./models/user')
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/customerData', {
     useNewUrlParser: true,
@@ -20,9 +28,43 @@ mongoose.connect('mongodb://127.0.0.1:27017/customerData', {
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'))
 
+//Middleware
 app.engine('ejs',engine)
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
+app.use(express.static(path.join(__dirname,'public')))
+
+const sessionConfig = {
+    secret:'thisshouldbeasecret!',
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 *60*24*7,
+        maxAge: 1000 * 60 *60*24*7
+    }
+}
+app.use(sessions(sessionConfig))
+app.use(flash())
+
+app.use((req,res,next)=>{
+    console.log(req.session)
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success')
+    res.locals.error = req.flash('error')
+    next()
+})
+
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+app.use('/customers', customersRoutes)
+app.use('/', userRoutes)
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -30,61 +72,14 @@ db.once('open', ()=>{
     console.log('Database connected!!!!!')
 });
 
-//all customers
-app.get('/customers/dashboard',catchAsync((req,res,next)=>{
-    res.render('customers/dashboard')
-}));
-
-
-app.get('/customers', catchAsync(async(req,res,next)=>{
-    const customers = await Customer.find({})
-    res.render('customers/index',{customers})
-}));
-
-//create a customer
-app.get('/customers/new', catchAsync(async(req,res,next)=>{
-    res.render('customers/new')
-}));
-
-app.post('/customers', catchAsync(async (req,res,next)=>{
-    const customer = new Customer(req.body);
-    await customer.save()
-    console.log(customer)
-    res.redirect('/customers')
-}));
-
-//show
-app.get('/customers/:id', catchAsync(async (req,res,next)=>{
-    const {id} = req.params
-    const customer = await Customer.findById(id)
-    res.render('customers/show',{customer})
-    console.log(customer)
-}));
-
-const geographies = ['France','Spain','Germany']
-const genders = ['Male','Female']
-
-//update
-app.get('/customers/:id/edit', catchAsync(async(req,res,next)=>{
-    const {id} = req.params
-    const customer = await Customer.findById(id)
-    res.render('customers/edit',{customer, genders, geographies})
-}));
-
-app.put("/customers/:id", catchAsync(async(req,res,next)=>{
-    const {id} = req.params
-    const customer = await Customer.findByIdAndUpdate(id,{... req.body})
-    res.redirect(`/customers/${customer._id}`)
-}));
-
-//delete
-app.delete('/customers/:id', catchAsync(async (req,res,next)=>{
-    const {id} = req.params
-    const deletedCustomer = await Customer.findByIdAndDelete(id)
-    console.log(deletedCustomer)
-    res.redirect("/customers")
-}));
-
+app.get('/fakeuser',async(req,res)=>{
+    const user = new User({
+        email: 'mangi@gmail.com',
+        username:'mangi'
+    })
+   const newUser= await User.register(user,'mangi')
+   res.send(newUser)
+})
 
 app.get('/',(req,res)=>{
     res.render('home')
