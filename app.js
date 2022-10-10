@@ -20,6 +20,8 @@ const passport = require('passport')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet')
+const MongoStore = require('connect-mongo')
+const dbUrl = 'mongodb+srv://mangaliso:VoCmmoQk9o3AxKUj@cluster0.bwvplxp.mongodb.net/?retryWrites=true&w=majority'
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/customerData', {
@@ -37,6 +39,7 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname,'public')))
 app.use(mongoSanitize())
 
+
 const sessionConfig = {
     secret:'thisshouldbeasecret!',
     resave:false,
@@ -45,8 +48,14 @@ const sessionConfig = {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 *60*24*7,
         maxAge: 1000 * 60 *60*24*7
-    }
+    },
+    store :MongoStore.create({ 
+        mongoUrl: 'mongodb://127.0.0.1:27017/customerData',
+        touchAfter: 24*60*60
+    })
 }
+
+
 app.use(sessions(sessionConfig))
 app.use(flash())
 
