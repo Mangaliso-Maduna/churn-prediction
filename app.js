@@ -21,10 +21,11 @@ const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet')
 const MongoStore = require('connect-mongo')
-const dbUrl = 'mongodb+srv://mangaliso:VoCmmoQk9o3AxKUj@cluster0.bwvplxp.mongodb.net/?retryWrites=true&w=majority'
+const localDbUrl = 'mongodb://127.0.0.1:27017/customerData'
+const dbUrl = 'mongodb+srv://mangaliso:VoCmmoQk9o3AxKUj@cluster0.bwvplxp.mongodb.net/?retryWrites=true&w=majority' || localDbUrl
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/customerData', {
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -38,10 +39,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname,'public')))
 app.use(mongoSanitize())
-
+const secret = process.env.SECRET || 'thisshouldbeasecret!';
 
 const sessionConfig = {
-    secret:'thisshouldbeasecret!',
+    secret,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -50,7 +51,7 @@ const sessionConfig = {
         maxAge: 1000 * 60 *60*24*7
     },
     store :MongoStore.create({ 
-        mongoUrl: 'mongodb://127.0.0.1:27017/customerData',
+        mongoUrl: dbUrl,
         touchAfter: 24*60*60
     })
 }
