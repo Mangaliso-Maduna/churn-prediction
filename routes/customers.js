@@ -10,7 +10,7 @@ const isLoggedIn = require('../middleware')
 
 
 //all customers
-router.get('/dashboard',catchAsync((req,res,next)=>{
+router.get('/dashboard',isLoggedIn,catchAsync((req,res,next)=>{
     res.render('customers/dashboard')
 }));
 
@@ -33,7 +33,7 @@ router.post('/', isLoggedIn,catchAsync(async (req,res,next)=>{
 }));
 
 //show
-router.get('/:id', catchAsync(async (req,res,next)=>{
+router.get('/:id', isLoggedIn,catchAsync(async (req,res,next)=>{
     const {id} = req.params
     const customer = await Customer.findById(id)
     if(!customer){
