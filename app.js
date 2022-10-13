@@ -21,6 +21,7 @@ const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet')
 const MongoStore = require('connect-mongo')
+const bodyParser = require('body-parser')
 const localDbUrl = 'mongodb://127.0.0.1:27017/customerData'
 const dbUrl = 'mongodb+srv://mangaliso:VoCmmoQk9o3AxKUj@cluster0.bwvplxp.mongodb.net/?retryWrites=true&w=majority' || localDbUrl
 
