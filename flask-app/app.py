@@ -1,13 +1,17 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect, url_for
 import joblib
 import numpy as np
 
 model = joblib.load(open('./ml/finalized_model.sav','rb'))
 
 app = Flask(__name__)
-@app.route('/')
-def man():
+@app.route('/predhome',methods=['GET'])
+def index():
     return render_template('home.ejs')
+
+@app.route('/predict', methods=['GET'])
+def pred():
+    return render_template('predict.ejs',data= pred)
 
 @app.route('/predict', methods=['POST'])
 def home():
@@ -31,4 +35,4 @@ def home():
     return render_template('predict.ejs', data= pred)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5000,debug=True)
