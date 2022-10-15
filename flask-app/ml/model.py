@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score,recall_score,f1_score
 from sklearn.ensemble import RandomForestClassifier
-import joblib
+import pickle
 from imblearn.over_sampling import SMOTE
 sns.set()
 
@@ -75,19 +75,18 @@ print(final_data)
 X_res = scaler.fit_transform(X_res)
 rfc.fit(X_res,y_res)
 
-filename = 'finalized_model.sav'
-joblib.dump(rfc,open(filename,'wb'))
 
-joblib.dump(rfc,filename)
+filename = 'finalized_model.pkl'
+pickle.dump(rfc, open(filename, 'wb'))
 
-model = joblib.load(filename)
+model = pickle.load(open(filename, 'rb'))
 
-input_data = [[800,65,4,0,0,0,1,101348.88,0,0,0]]
+input_data = [[300,65,0,0,1,1,1,65000,0,0,0]]
 
 prediction = model.predict(input_data)
 print(prediction)
 
-if (prediction[0] == 0):
+if(prediction[0] == 0):
   print('The person is will not churn')
 else:
   print('The person has churned')
