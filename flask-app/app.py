@@ -1,17 +1,18 @@
 from flask import Flask, render_template, request,redirect, url_for
-import joblib
+import pickle
 import numpy as np
 
-model = joblib.load(open('./ml/finalized_model.sav','rb'))
+model = pickle.load(open('./ml/finalized_model.pkl','rb'))
 
 app = Flask(__name__)
+
 @app.route('/predhome',methods=['GET'])
 def index():
     return render_template('home.ejs')
 
-@app.route('/predict', methods=['GET'])
+@app.route('/predict',methods=['GET'])
 def pred():
-    return render_template('predict.ejs',data= pred)
+    return render_template('home.ejs')
 
 @app.route('/predict', methods=['POST'])
 def home():
@@ -24,15 +25,15 @@ def home():
     hasCrCard = request.form['HasCrCard']
     isActiveMember = request.form['IsActiveMember']
     estimatedSalary = request.form['EstimatedSalary']
-    geographyGremany = request.form['Geography_Germany']
+    geographyGermany = request.form['Geography_Germany']
     geographySpain = request.form['Geography_Spain']
     gender = request.form['Gender']  
 
-    arr = np.array([[creditScore, age, tenure, balance, numberOfProducts, 
-    hasCrCard, isActiveMember, estimatedSalary, geographyGremany,geographySpain, gender]])
+    arr = [[creditScore, age, tenure, balance, numberOfProducts, 
+    hasCrCard, isActiveMember, estimatedSalary, geographyGermany,geographySpain, gender]]
 
     pred = model.predict(arr)
     return render_template('predict.ejs', data= pred)
 
 if __name__ == "__main__":
-    app.run(port=5000,debug=True)
+    app.run(debug=True)
