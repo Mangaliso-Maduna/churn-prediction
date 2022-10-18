@@ -78,15 +78,3 @@ rfc.fit(X_res,y_res)
 
 filename = 'finalized_model.pkl'
 pickle.dump(rfc, open(filename, 'wb'))
-
-model = pickle.load(open(filename, 'rb'))
-
-input_data = [[300,65,0,0,1,1,1,65000,0,0,0]]
-
-prediction = model.predict(input_data)
-print(prediction)
-
-if(prediction[0] == 0):
-  print('The person is will not churn')
-else:
-  print('The person has churned')

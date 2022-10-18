@@ -147,19 +147,19 @@ app.get('/fakeuser',async(req,res)=>{
    res.send(newUser)
 })
 
-app.get('/home', (req,res)=>{
-    request('http://127.0.0.1:5000/predhome',function (error, response, body){
-        console.error('error:', error); // Print the error
-        res.send(body); //Display the response on the website
-    })
-})
-
 app.get('/predict', (req,res)=>{
     request('http://127.0.0.1:5000/predict',function (error, response, body){
         console.error('error:', error); // Print the error
         res.send(body); //Display the response on the website
     })
 })
+
+app.post('/predict', (req,res)=>{
+    request('http://127.0.0.1:5000/predict',function (error, response, body){
+        res.send(body); //Display the response on the website
+    })
+})
+
 
 app.get('/',(req,res)=>{
     res.render('home')

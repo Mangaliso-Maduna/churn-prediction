@@ -15,9 +15,9 @@
     <main class="container mt-5">
         <div class="row">
             <div class="col-6 offset-3">
-                <h1 class="text-center">Add new customer</h1>
+                <h1 class="text-center">Predictons Status:</h1>
 
-                <form action="/predict" method="post" class="validated-form" novalidate>
+                <form action="{{ url_for('predict')}}" method="post" class="validated-form" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="name">Customer Names</label>
                         <input class="form-control" type="text" name="name" id="name" required>
@@ -61,26 +61,32 @@
                         <input class="form-control" type="number" name="EstimatedSalary" id="salary" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="Geography_Germany">geography_Germany: </label>
-                        <input class="form-control" type="number" name="Geography_Germany" id="Geography_Germany"
-                            required>
+                        <label class="form-label" for="Geography_Germany">Geography:</label>
+                        <select  class="form-select" name="Geography_Germany" id="Geography_Germany" aria-placeholder="select geography" required>
+                            <option selected ></option>
+                            <option value="Germany">Germany</option>
+                            <option value="Spain">Spain</option>
+                            <option value="France">France</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="Geography_Spain">Geography_Spain </label>
-                        <input class="form-control" type="number" name="Geography_Spain" id="Geography_Spain" required>
+                        <label class="form-label" for="Gender">Gender:</label>
+                        <select class="form-select" name="Gender" id="Gender" required> 
+                            <option selected disabled></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="Gender">Gender <strong>(Male:1, Female:0)</strong>:</label>
-                        <input class="form-control" type="number" name="Gender" id="Gender" required>
-                    </div>
                     <div class="mb-3">
                         <button class="btn btn-success">Predict</button>
                     </div>
                 </form>
+                <br><h3 class="display-3">{{ prediction_msg }}</h3>
             </div>
         </div>
     </main>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
