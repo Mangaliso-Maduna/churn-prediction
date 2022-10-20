@@ -147,22 +147,46 @@ app.get('/fakeuser',async(req,res)=>{
    res.send(newUser)
 })
 
-app.get('/predict', (req,res)=>{
-    request('http://127.0.0.1:5000/predict',function (error, response, body){
+app.get('/',(req,res)=>{
+    res.render('home')
+})
+
+app.get('/predict',(req,res)=>{
+    request('http://127.0.0.1:5500/public/pred.html',function (error, response, body){
         console.error('error:', error); // Print the error
         res.send(body); //Display the response on the website
     })
 })
 
-app.post('/predict', (req,res)=>{
-    request('http://127.0.0.1:5000/predict',function (error, response, body){
-        res.send(body); //Display the response on the website
+app.post('/predict',(req,res)=>{
+    let body = {
+        name:this.name,
+        CreditScore: this.CreditScore,
+        Age: this.Age,
+        Tenure: this.Tenure,
+        Balance: this.Balance,
+        NumberOfProducts: this.NumberOfProducts,
+        HasCrCard: this.HasCrCard,
+        IsActiveMember: this.IsActiveMember,
+        EstimatedSalary: this.EstimatedSalary,
+        Geography_Germany: this.Geography_Germany,
+        Gender: this.Gender
+    }
+    const formData = new FormData()
+    formData.append('CreditScore',this.CreditScore)
+    formData.append('Age', this.Age)
+    formData.append('Tenure', this.Tenure)
+    formData.append('Balance', this.Balance)
+    formData.append('NumberOfProducts', this.NumberOfProducts)
+    formData.append('HasCrCard', this.HasCrCard)
+    formData.append('IsActiveMember', this.IsActiveMember)
+    formData.append('EstimatedSalary', this.EstimatedSalary)
+    formData.append('Geography_Germany', this.Geography_Germany)
+    formData.append('Gender', this.Gender)
+    request('http://127.0.0.1:5500/public/pred.html',formData,function (error, response, formData){
+        console.error('error:', error); // Print the error
+        res.send(formData); //Display the response on the website
     })
-})
-
-
-app.get('/',(req,res)=>{
-    res.render('home')
 })
 
 
