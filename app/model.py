@@ -85,3 +85,14 @@ with open(filename, 'wb') as f:
     pickle.dump(rfc, f)
 
 
+model = joblib.load(open(r'C:\Users\manga\Desktop\projects\capstone\Capstone\Smart_Churn\app\Customer_Churn_Prediction.sav','rb'))
+
+input_data = [[300,21,0,0,0,0,0,3900,0,0,1]]
+
+prediction = model.predict(input_data)
+print(prediction)
+if (prediction[0] == 0):
+    print('The person is will not churn')
+else:
+    print('The person has churned')
+

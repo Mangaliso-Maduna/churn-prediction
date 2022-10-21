@@ -151,7 +151,7 @@ app.get('/',(req,res)=>{
     res.render('home')
 })
 
-app.get('/predict',(req,res)=>{
+/* app.get('/predict',(req,res)=>{
     request('http://127.0.0.1:5500/public/pred.html',function (error, response, body){
         console.error('error:', error); // Print the error
         res.send(body); //Display the response on the website
@@ -187,8 +187,11 @@ app.post('/predict',(req,res)=>{
         console.error('error:', error); // Print the error
         res.send(formData); //Display the response on the website
     })
-})
+}) */
 
+app.get('/predict',function(req,res){
+    res.render('pred')
+})
 
 app.all('*',(req,res,next)=>{
     next(new ExpressError('PAGE NOT FOUND!!!',404))
@@ -200,6 +203,7 @@ app.use(function(err, req,res,next){
     res.status(statusCode).render('errors',{err})
     
 })
+
 
 const PORT = process.env.PORT || 8080;
 
