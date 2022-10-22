@@ -15,7 +15,7 @@ router.get('/dashboard',isLoggedIn,catchAsync((req,res,next)=>{
 }));
 
 
-router.get('/', catchAsync(async(req,res,next)=>{
+router.get('/', isLoggedIn, catchAsync(async(req,res,next)=>{
     const customers = await Customer.find({})
     res.render('customers/index',{customers})
 }));
